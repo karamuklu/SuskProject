@@ -12,11 +12,14 @@ namespace INF_SUSK_Project_Entities
         public string ISEMRINO { get; set; }
         public string STOK_KODU { get; set; }
         public decimal MIKTAR { get; set; }
+        public DateTime TESLIM_TARIHI { get; set; }
+        public string ACIKLAMA { get; set; }
+        public string REFISEMRINO { get; set; }
+        public string SIPARIS_NO { get; set; }
         public int SUSKDEPOGIRIS { get; set; }
         public int SUSKDEPOCIKIS { get; set; }
         public string SERI_NO { get; set; }
-        public string REFISEMRINO { get; set; }
-        public string ACIKLAMA { get; set; }
+        
     }
 }
 

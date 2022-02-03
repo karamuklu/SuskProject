@@ -19,6 +19,7 @@ namespace INF_SUSK_Project_Entities
         public string KAPALI { get; set; }
         public string ACIKLAMA { get; set; }
         public string SIPARIS_NO { get; set; }
+        public string REFISEMRINO { get; set; }
         public int SIRA { get; set; }
     }
 }

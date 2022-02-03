@@ -33,11 +33,8 @@
             this.btnSUSK_Kaydet = new System.Windows.Forms.Button();
             this.txtSUSK = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.prgsBar = new System.Windows.Forms.ProgressBar();
             this.label2 = new System.Windows.Forms.Label();
             this.btnDepoTransfer = new System.Windows.Forms.Button();
-            this.dgw_Ekran = new DevExpress.XtraGrid.GridControl();
-            this.dgvListe = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.btnDurumKontrol = new System.Windows.Forms.Button();
             this.btnYariMamulSUSK = new System.Windows.Forms.Button();
             this.txtSUSKGirisDepo = new System.Windows.Forms.TextBox();
@@ -51,7 +48,7 @@
             this.txtSeriNo = new System.Windows.Forms.TextBox();
             this.btnDirekIsemriAc = new System.Windows.Forms.Button();
             this.ilkSeviyeIsemriAc = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgw_Ekran)).BeginInit();
+            this.dgvListe = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListe)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,13 +88,6 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "SUSK Başlangıç Harf";
             // 
-            // prgsBar
-            // 
-            this.prgsBar.Location = new System.Drawing.Point(0, 206);
-            this.prgsBar.Name = "prgsBar";
-            this.prgsBar.Size = new System.Drawing.Size(1142, 23);
-            this.prgsBar.TabIndex = 8;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -116,23 +106,6 @@
             this.btnDepoTransfer.Text = "Hammadde Kontrol & Depo Transfer";
             this.btnDepoTransfer.UseVisualStyleBackColor = true;
             this.btnDepoTransfer.Click += new System.EventHandler(this.btnDepoTransfer_Click);
-            // 
-            // dgw_Ekran
-            // 
-            this.dgw_Ekran.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgw_Ekran.Location = new System.Drawing.Point(0, 232);
-            this.dgw_Ekran.MainView = this.dgvListe;
-            this.dgw_Ekran.Name = "dgw_Ekran";
-            this.dgw_Ekran.Size = new System.Drawing.Size(1142, 517);
-            this.dgw_Ekran.TabIndex = 13;
-            this.dgw_Ekran.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.dgvListe});
-            // 
-            // dgvListe
-            // 
-            this.dgvListe.GridControl = this.dgw_Ekran;
-            this.dgvListe.Name = "dgvListe";
-            this.dgvListe.OptionsBehavior.Editable = false;
             // 
             // btnDurumKontrol
             // 
@@ -209,7 +182,6 @@
             this.btnAspirin.TabIndex = 23;
             this.btnAspirin.Text = "123-ATEŞŞŞ--->>";
             this.btnAspirin.UseVisualStyleBackColor = true;
-            this.btnAspirin.Click += new System.EventHandler(this.btnAspirin_Click);
             // 
             // txtParola
             // 
@@ -264,11 +236,21 @@
             this.ilkSeviyeIsemriAc.UseVisualStyleBackColor = true;
             this.ilkSeviyeIsemriAc.Click += new System.EventHandler(this.ilkSeviyeIsemriAc_Click);
             // 
+            // dgvListe
+            // 
+            this.dgvListe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListe.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvListe.Location = new System.Drawing.Point(0, 220);
+            this.dgvListe.Name = "dgvListe";
+            this.dgvListe.Size = new System.Drawing.Size(1142, 529);
+            this.dgvListe.TabIndex = 29;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1142, 749);
+            this.Controls.Add(this.dgvListe);
             this.Controls.Add(this.ilkSeviyeIsemriAc);
             this.Controls.Add(this.btnDirekIsemriAc);
             this.Controls.Add(this.txtSeriNo);
@@ -282,10 +264,8 @@
             this.Controls.Add(this.txtSUSKGirisDepo);
             this.Controls.Add(this.btnYariMamulSUSK);
             this.Controls.Add(this.btnDurumKontrol);
-            this.Controls.Add(this.dgw_Ekran);
             this.Controls.Add(this.btnDepoTransfer);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.prgsBar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSUSK);
             this.Controls.Add(this.btnSUSK_Kaydet);
@@ -299,7 +279,6 @@
             this.Text = "Serbest Üretim Sonu Kaydı v.2.1.2 - İnform Elektronik";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.DoubleClick += new System.EventHandler(this.Form1_DoubleClick);
-            ((System.ComponentModel.ISupportInitialize)(this.dgw_Ekran)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListe)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -311,11 +290,8 @@
 		private System.Windows.Forms.Button btnSUSK_Kaydet;
 		private System.Windows.Forms.TextBox txtSUSK;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.ProgressBar prgsBar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDepoTransfer;
-        private DevExpress.XtraGrid.GridControl dgw_Ekran;
-        private DevExpress.XtraGrid.Views.Grid.GridView dgvListe;
         private System.Windows.Forms.Button btnDurumKontrol;
         private System.Windows.Forms.Button btnYariMamulSUSK;
         private System.Windows.Forms.TextBox txtSUSKGirisDepo;
@@ -329,6 +305,7 @@
         private System.Windows.Forms.TextBox txtSeriNo;
         private System.Windows.Forms.Button btnDirekIsemriAc;
         private System.Windows.Forms.Button ilkSeviyeIsemriAc;
+        private System.Windows.Forms.DataGridView dgvListe;
     }
 }
 

@@ -235,7 +235,7 @@ namespace INF_SUSK_Project_BusinessLayer
                 Isemri.Miktar = (double)item.MIKTAR;//depo adetine bak, fark kadar aç
                 //Isemri.SiparisNo = acilacakIsemri.SIPARIS_NO;  // Müşteri sipariş no
                 Isemri.TeslimTarihi = item.TESLIM_TARIHI.Date;
-                //Isemri.RefIsEmriNo = acilacakIsemri.REFISEMRINO;
+                Isemri.RefIsEmriNo = item.REFISEMRINO;
                 Isemri.SiparisNo = item.SIPARIS_NO;
                  Isemri.SipKont = item.SIRA;
                 Isemri.Aciklama = item.ACIKLAMA;//"B";// acilacakIsemri.ACIKLAMA;

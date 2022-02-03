@@ -45,7 +45,7 @@ namespace INF_SUSK_Project
             // bu da bir kullanım şeklidir. Aslında bu şekilde kullanmak daha faydalıdır. 
             // bir çok intelligence aracı bu şekilde kullanılmasını tavsiye ediyor.
             if (OFD.ShowDialog() == DialogResult.OK)
-            // perncere açıldığında dosya seçildi ise yapılacak. Bunu yazmazsak dosya seçmeden 
+            // pencere açıldığında dosya seçildi ise yapılacak. Bunu yazmazsak dosya seçmeden 
             // kapandığında program kırılacaktır.
             {
                 var DosyaYolu = OFD.FileName;// dosya yolu
@@ -64,30 +64,84 @@ namespace INF_SUSK_Project
                 da.Fill(DTexcel);
                 // select sorgusu ile okunan verileri datatable'ye aktarıyoruz.
                 dgvListe.Columns.Clear();
-                dgw_Ekran.DataSource = DTexcel;
+                dgvListe.DataSource = DTexcel;
                 // datatable'ı da gridcontrol'ün datasource'una atıyoruz.
 
                 baglanti.Close();
                 // bağlantıyı kapatıyoruz.
+
+                //MessageBox.Show(dgvListe.Rows[0].Cells[1].Value.ToString());
+                //MessageBox.Show(dgvListe.CurrentRow.Cells[1].ToString());
+
+
+                label2.Text = dgvListe.RowCount.ToString();
+
+                //var list =
+                //(from DataRow dr in DTexcel.Rows
+                // select new SUSK_LISTESI()
+                // {
+                //     TARIH = Convert.ToDateTime(dr["TARIH"]),
+                //     ISEMRINO = dr["ISEMRINO"].ToString(),
+                //     STOK_KODU = dr["STOK_KODU"].ToString(),
+                //     MIKTAR = Convert.ToDecimal(dr["MIKTAR"].ToString()),
+                //     ACIKLAMA = dr["ACIKLAMA"].ToString()
+                // }).ToList();
+
+
+                for (int i = 0; i < dgvListe.RowCount - 1; i++)
+                {
+                    DataGridViewRow row = dgvListe.Rows[i];
+
+                    SUSK_LISTESI suskEleman = new SUSK_LISTESI();
+                    suskEleman.TARIH = Convert.ToDateTime(row.Cells[0].Value);
+                    suskEleman.ISEMRINO = row.Cells[1].Value.ToString();
+                    suskEleman.STOK_KODU = (row.Cells[2].Value.ToString());
+                    suskEleman.MIKTAR = Convert.ToDecimal(row.Cells[3].Value);
+                    suskEleman.TESLIM_TARIHI = Convert.ToDateTime(row.Cells[4].Value);
+                    suskEleman.ACIKLAMA = (row.Cells[5].Value.ToString());
+                    suskEleman.REFISEMRINO = (row.Cells[6].Value.ToString());
+                    suskEleman.SIPARIS_NO = (row.Cells[7].Value.ToString());
+
+                    #region eskiKod
+                    //if ((dgvListe.GetRowCellValue(i, "SIRA").ToString() == ""))
+                    //    isemri.SIRA = 0;
+                    //else
+                    //    isemri.SIRA = Convert.ToInt32(dgvListe.GetRowCellValue(i, "SIRA").ToString() == "");
+                    #endregion
+                    Anamamul_GenelList.Add(suskEleman);
+                }
+                #region eskiKod
+                ////---Eski Kod---////
+                //foreach (DataGridViewRow row in dgvListe.Rows)
+                //{
+
+                //    SUSK_LISTESI suskEleman = new SUSK_LISTESI();
+                //    suskEleman.TARIH = Convert.ToDateTime(row.Cells[0].Value.ToString());
+                //    suskEleman.ISEMRINO = (row.Cells[1].Value.ToString());
+                //    suskEleman.STOK_KODU = (row.Cells[2].Value.ToString());
+                //    suskEleman.MIKTAR = Convert.ToDecimal(row.Cells[3].Value.ToString());
+                //    suskEleman.ACIKLAMA = (row.Cells[4].Value.ToString());
+
+                //    Anamamul_GenelList.Add(suskEleman);
+                //}
+                ////---Eski Kod---////
+                ///
+                #endregion
             }
-
-            label2.Text = dgvListe.RowCount.ToString();
-
-            for (int i = 0; i < dgvListe.RowCount; i++)
             {
-                SUSK_LISTESI suskEleman = new SUSK_LISTESI();
-                suskEleman.TARIH = Convert.ToDateTime(dgvListe.GetRowCellValue(i, "TARIH"));
-                suskEleman.ISEMRINO = (dgvListe.GetRowCellValue(i, "ISEMRINO").ToString());
-                suskEleman.STOK_KODU = (dgvListe.GetRowCellValue(i, "STOK_KODU").ToString());
-                suskEleman.MIKTAR = Convert.ToDecimal(dgvListe.GetRowCellValue(i, "MIKTAR"));
-                suskEleman.ACIKLAMA = (dgvListe.GetRowCellValue(i, "ACIKLAMA").ToString());
-                if (dgvListe.GetRowCellValue(i, "SERI_NO") == null)
-                    suskEleman.SERI_NO = "";
-                else
-                    suskEleman.SERI_NO = (dgvListe.GetRowCellValue(i, "SERI_NO").ToString());
-                Anamamul_GenelList.Add(suskEleman);
+                //SUSK_LISTESI suskEleman = new SUSK_LISTESI();
+                //suskEleman.TARIH = Convert.ToDateTime(dgvListe.CurrentRow.Cells[i]);
+                //suskEleman.ISEMRINO = (dgvListe.CurrentRow.Cells[i].ToString());
+                //suskEleman.STOK_KODU = (dgvListe.GetRowCellValue(i, "STOK_KODU").ToString());
+                //suskEleman.MIKTAR = Convert.ToDecimal(dgvListe.GetRowCellValue(i, "MIKTAR"));
+                //suskEleman.ACIKLAMA = (dgvListe.GetRowCellValue(i, "ACIKLAMA").ToString());
+                //if (dgvListe.GetRowCellValue(i, "SERI_NO") == null)
+                //    suskEleman.SERI_NO = "";
+                //else
+                //    suskEleman.SERI_NO = (dgvListe.GetRowCellValue(i, "SERI_NO").ToString());
+                //Anamamul_GenelList.Add(suskEleman);
             }
-
+            #region eskiKod
             //foreach (var item in susk_GenelList)
             //{
             //    var kontrol = inf_SUSK_Manager.SUSK_KONTROL(item.ISEMRINO);
@@ -99,11 +153,36 @@ namespace INF_SUSK_Project
             //}
             //btnSUSK_Kaydet.Enabled = true;
             //btnExcelOku.Enabled = false;
+            #endregion
+            dgvListe.DataSource = Anamamul_GenelList;
             btnDurumKontrol.Visible = true;
             txtIsemriNo.Visible = true;
-            
         }
+        private void btnDirekIsemriAc_Click(object sender, EventArgs e)
+        {
+            List<TBLISEMRI> acilacakIsemriList = new List<TBLISEMRI>();
+            for (int i = 0; i < dgvListe.RowCount ; i++)
+            {
+                DataGridViewRow row = dgvListe.Rows[i];
 
+                TBLISEMRI isemri = new TBLISEMRI();
+                isemri.TARIH = Convert.ToDateTime(row.Cells[0].Value);
+                isemri.ISEMRINO = row.Cells[1].Value.ToString();
+                isemri.STOK_KODU = (row.Cells[2].Value.ToString());
+                isemri.MIKTAR = Convert.ToDecimal(row.Cells[3].Value);
+                isemri.TESLIM_TARIHI = Convert.ToDateTime(row.Cells[4].Value);
+                isemri.ACIKLAMA = (row.Cells[5].Value.ToString());
+                isemri.REFISEMRINO = (row.Cells[6].Value.ToString());
+
+                //if ((dgvListe.GetRowCellValue(i, "SIRA").ToString() == ""))
+                //    isemri.SIRA = 0;
+                //else
+                //    isemri.SIRA = Convert.ToInt32(dgvListe.GetRowCellValue(i, "SIRA").ToString() == "");
+
+                acilacakIsemriList.Add(isemri);
+            }
+            inf_SUSK_Manager.DIREKACILACAK_ISEMIRLERI(acilacakIsemriList);
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -125,7 +204,6 @@ namespace INF_SUSK_Project
 
             Anamamul_GenelList.Clear();
         }
-
         private void btnSUSK_Kaydet_Click(object sender, EventArgs e)
         {
             if (txtSUSK.Text == "")
@@ -157,7 +235,6 @@ namespace INF_SUSK_Project
             }
             // prgsBar.Value = 100;
         }
-
         private void btnDepoTransfer_Click(object sender, EventArgs e)
         {
             AutoClosingMessageBox.Show("Hammadde Depo Transfer işlemi başlatılacaktır...", "Depo Transfer Kontrol", 1000);
@@ -167,8 +244,8 @@ namespace INF_SUSK_Project
                 transferListesi.AddRange(list);
             }
 
-            dgvListe.Columns.Clear();//Grid temizleme işlemi, yoksa doğru çalışmıyor.
-            dgw_Ekran.DataSource = transferListesi;
+            //dgvListe.Columns.Clear();//Grid temizleme işlemi, yoksa doğru çalışmıyor.
+            //dgvListe.DataSource = transferListesi;
             btnDepoTransfer.Text = "Depo Transferi Yap";
             AutoClosingMessageBox.Show("Sistem Transfere hazırdır, Depo Transfer işlemi başlatılacak..!", "Depo Transfer Kontrol", 2000);
 
@@ -199,14 +276,13 @@ namespace INF_SUSK_Project
             //bu aşamada anamamul altındaki yarı mamuller bulunur
             //sonra yarımamul işemirleri ana mamule bağlantılı olanlar bulunur
 
-            label2.Text = dgvListe.RowCount.ToString();
+            //label2.Text = dgvListe.RowCount.ToString();
             //btnDepoTransfer.Visible = true;
             //btnDurumKontrol.Enabled = false;
             //btnYariMamulSUSK.Visible = true;
             ////btnDepoTransfer.Enabled = false;
             //btnSUSK_Kaydet.Visible = true;
         }
-
         private void btnDurumKontrol_Click(object sender, EventArgs e)
         {
 
@@ -219,7 +295,7 @@ namespace INF_SUSK_Project
             //    isemirleri.Add("'" + (row.ItemArray[1].ToString()) + "'");
             //}
 
-            //dgw_Ekran.DataSource= inf_SUSK_Manager.ACILANISEMIRLERI(isemirleri);
+            //dgvListe.DataSource= inf_SUSK_Manager.ACILANISEMIRLERI(isemirleri);
 
             //ilk kontrol->Anamamül işemrino SUSK tablosunda var mı
 
@@ -238,23 +314,23 @@ namespace INF_SUSK_Project
             {
                 foreach (var anaMamul in Anamamul_GenelList)
                 {
-                    var list = inf_SUSK_Manager.YariMamul_Bul(anaMamul.STOK_KODU, anaMamul.ISEMRINO, anaMamul.MIKTAR, anaMamul.TARIH,5,anaMamul.ACIKLAMA);
+                    var list = inf_SUSK_Manager.YariMamul_Bul(anaMamul.STOK_KODU, anaMamul.ISEMRINO, anaMamul.MIKTAR, anaMamul.TARIH, 5, anaMamul.ACIKLAMA);
                     yariMamulList.AddRange(list);
                 }
 
                 var grupYariMamul = yariMamulList.GroupBy(a => a.STOK_KODU).Select(y => new YARIMAMULGRUP
                 {
-                    STOK_KODU =y.First().STOK_KODU,
-                    REFISEMRINO=y.First().REFISEMRINO,
-                    TARIH=y.First().TARIH,
-                    ANAMAMUL=y.First().ANAMAMUL,
+                    STOK_KODU = y.First().STOK_KODU,
+                    REFISEMRINO = y.First().REFISEMRINO,
+                    TARIH = y.First().TARIH,
+                    ANAMAMUL = y.First().ANAMAMUL,
                     MIKTAR = y.Sum(x => x.TRANSFERMIKTAR),
-                    ACIKLAMA=y.First().ACIKLAMA
+                    ACIKLAMA = y.First().ACIKLAMA
                 });
 
-                dgvListe.Columns.Clear();
-                dgw_Ekran.DataSource = grupYariMamul;
-                label2.Text = dgvListe.RowCount.ToString();
+                //dgvListe.Columns.Clear();
+                //dgvListe.DataSource = grupYariMamul;
+                //label2.Text = dgvListe.RowCount.ToString();
 
                 //List<YARIMAMULGRUP> result = yariMamulList.GroupBy(l => l.STOK_KODU).Select(cl => new YARIMAMULGRUP
                 //{
@@ -262,7 +338,7 @@ namespace INF_SUSK_Project
                 //    MIKTAR = cl.Sum(x => x.TRANSFERMIKTAR)
                 //}).ToList();
                 //dgvListe.Columns.Clear();
-                //dgw_Ekran.DataSource = result;
+                //dgvListe.DataSource = result;
                 //label2.Text = dgvListe.RowCount.ToString();
 
                 //yarıMamulList->Genel Liste
@@ -322,27 +398,27 @@ namespace INF_SUSK_Project
                 //    AutoClosingMessageBox.Show("Açılması gereken " + listIsemriOlmayanlar.Count + " adet işemri mevcuttur. İşemirleri otomatik olarak açılacaktır..!", "İşemri Kontrol", 2000);
 
                 //    dgvListe.Columns.Clear();//Grid temizleme işlemi, yoksa doğru çalışmıyor.
-                //    dgw_Ekran.DataSource = listIsemriOlmayanlar;
-                //    label2.Text = dgw_Ekran.DefaultView.RowCount.ToString();
+                //    dgvListe.DataSource = listIsemriOlmayanlar;
+                //    label2.Text = dgvListe.DefaultView.RowCount.ToString();
 
 
                 foreach (var item in grupYariMamul)
-                 {
-                     TBLISEMRI_MKA isemri = new TBLISEMRI_MKA();
-                     isemri.ISEMRINO = inf_SUSK_Manager.ISEMRINO_OLUSTUR(txtIsemriNo.Text);
-                     isemri.STOK_KODU = item.STOK_KODU;
-                     isemri.TARIH = DateTime.Now;
-                     isemri.MIKTAR = item.MIKTAR;
-                     isemri.TESLIM_TARIHI = item.TARIH.Date;//excelden gelen tarih alınacak
-                     isemri.ACIKLAMA = item.ACIKLAMA;
-                     isemri.ANAMAMUL = item.ANAMAMUL; //Yarımamuller gruplanıp toplandığı içinde bağlantı kısmı pasif yapıldı.
-                     isemri.REFISEMRINO = item.REFISEMRINO;
+                {
+                    TBLISEMRI_MKA isemri = new TBLISEMRI_MKA();
+                    isemri.ISEMRINO = inf_SUSK_Manager.ISEMRINO_OLUSTUR(txtIsemriNo.Text);
+                    isemri.STOK_KODU = item.STOK_KODU;
+                    isemri.TARIH = DateTime.Now;
+                    isemri.MIKTAR = item.MIKTAR;
+                    isemri.TESLIM_TARIHI = item.TARIH.Date;//excelden gelen tarih alınacak
+                    isemri.ACIKLAMA = item.ACIKLAMA;
+                    isemri.ANAMAMUL = item.ANAMAMUL; //Yarımamuller gruplanıp toplandığı içinde bağlantı kısmı pasif yapıldı.
+                    isemri.REFISEMRINO = item.REFISEMRINO;
 
-                     inf_SUSK_Manager.ACILACAK_ISEMIRLERI(isemri);//işemri açan kod
-                     //inf_SUSK_Manager.IsEmriEkalan_Guncelle(isemri.ISEMRINO, Convert.ToInt32(item.BAKIYE118KULLANILAN));
-                     AutoClosingMessageBox.Show(isemri.ISEMRINO + " nolu işemri açılmıştır.", "İşemri Kontrol", 1000);
-                     acilacakIsemirleri.Add(isemri);
-                 }
+                    inf_SUSK_Manager.ACILACAK_ISEMIRLERI(isemri);//işemri açan kod
+                                                                 //inf_SUSK_Manager.IsEmriEkalan_Guncelle(isemri.ISEMRINO, Convert.ToInt32(item.BAKIYE118KULLANILAN));
+                    AutoClosingMessageBox.Show(isemri.ISEMRINO + " nolu işemri açılmıştır.", "İşemri Kontrol", 1000);
+                    acilacakIsemirleri.Add(isemri);
+                }
 
                 //    AutoClosingMessageBox.Show("Sistemde " + acilacakIsemirleri.Count + " işemri açılmıştır.", "Otomatik açılan işemirleri", 2000);
                 //}
@@ -353,18 +429,17 @@ namespace INF_SUSK_Project
                 //}
 
 
-                //dgvListe.Columns.Clear();//Grid temizleme işlemi, yoksa doğru çalışmıyor.
-                //dgw_Ekran.DataSource = yariMamulIsemirleri;
-                //label2.Text = dgvListe.RowCount.ToString();
-                //btnDepoTransfer.Visible = true;
-                //btnDurumKontrol.Enabled = false;
-                //btnYariMamulSUSK.Visible = true;
-                //btnSUSK_Kaydet.Visible = true;
+                dgvListe.Columns.Clear();//Grid temizleme işlemi, yoksa doğru çalışmıyor.
+                dgvListe.DataSource = yariMamulIsemirleri;
+                label2.Text = dgvListe.RowCount.ToString();
+                btnDepoTransfer.Visible = true;
+                btnDurumKontrol.Enabled = false;
+                btnYariMamulSUSK.Visible = true;
+                btnSUSK_Kaydet.Visible = true;
 
                 yariMamulList.Clear();
             }
         }
-
         private void btnYariMamulSUSK_Click(object sender, EventArgs e)
         {
             if (txtSUSKCikisDepo.Text == "118")
@@ -389,7 +464,7 @@ namespace INF_SUSK_Project
                         suskEleman.REFISEMRINO = item.REFISEMRINO;
                         yariMamulSuskListDepolu.Add(suskEleman);
                     }
-                    dgw_Ekran.DataSource = yariMamulSuskListDepolu;
+                    dgvListe.DataSource = yariMamulSuskListDepolu;
                     label2.Text = dgvListe.RowCount.ToString();
                     AutoClosingMessageBox.Show("SUSK işlemi başlatılacaktır..!", "SUSK Uyarı", 2000);
 
@@ -404,24 +479,20 @@ namespace INF_SUSK_Project
                 MessageBox.Show("Depo Kodu 118 olmalı");
             }
         }
-
         private void txtIsemriNo_Enter(object sender, EventArgs e)
         {
             if (txtIsemriNo.Text == "İşemri için Harf Giriniz")
                 txtIsemriNo.Text = "";
         }
-
         private void txtIsemriNo_Leave(object sender, EventArgs e)
         {
             if (txtIsemriNo.Text == "")
                 txtIsemriNo.Text = "İşemri için Harf Giriniz";
         }
-
         private void Form1_DoubleClick(object sender, EventArgs e)
         {
             txtParola.Visible = true;
         }
-
         private void txtParola_TextChanged(object sender, EventArgs e)
         {
             if (txtParola.Text == "bmw")
@@ -429,12 +500,6 @@ namespace INF_SUSK_Project
                 btnAspirin.Visible = true;
             }
         }
-
-        private void btnAspirin_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtIsemriBarkod_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -468,7 +533,7 @@ namespace INF_SUSK_Project
                     {
                         foreach (var yariMamul in Anamamul_GenelList)
                         {
-                            var list = inf_SUSK_Manager.YariMamul_Bul(yariMamul.STOK_KODU, yariMamul.ISEMRINO, yariMamul.MIKTAR, yariMamul.TARIH,2, yariMamul.ACIKLAMA);
+                            var list = inf_SUSK_Manager.YariMamul_Bul(yariMamul.STOK_KODU, yariMamul.ISEMRINO, yariMamul.MIKTAR, yariMamul.TARIH, 2, yariMamul.ACIKLAMA);
                             yariMamulList.AddRange(list);
                         }
 
@@ -515,8 +580,8 @@ namespace INF_SUSK_Project
                             AutoClosingMessageBox.Show("Açılması gereken " + listIsemriOlmayanlar.Count + " adet işemri mevcuttur. İşemirleri otomatik olarak açılacaktır..!", "İşemri Kontrol", 2000);
 
                             dgvListe.Columns.Clear();//Grid temizleme işlemi, yoksa doğru çalışmıyor.
-                            dgw_Ekran.DataSource = listIsemriOlmayanlar;
-                            label2.Text = dgw_Ekran.DefaultView.RowCount.ToString();
+                            dgvListe.DataSource = listIsemriOlmayanlar;
+                            label2.Text = dgvListe.RowCount.ToString();
                             foreach (var item in listIsemriOlmayanlar)
                             {
                                 TBLISEMRI_MKA isemri = new TBLISEMRI_MKA();
@@ -540,44 +605,39 @@ namespace INF_SUSK_Project
                         {
                             AutoClosingMessageBox.Show("Yarımamül işemirleri daha önceden açılmıştır.", "İşemri Kontrol", 2000);
                         }
-                        //dgvListe.Columns.Clear();//Grid temizleme işlemi, yoksa doğru çalışmıyor.
-                        //dgw_Ekran.DataSource = yariMamulIsemirleri;
-                        //label2.Text = dgvListe.RowCount.ToString();
-                        //btnDepoTransfer.Visible = true;
-                        //btnDurumKontrol.Enabled = false;
-                        //btnYariMamulSUSK.Visible = true;
-                        //btnSUSK_Kaydet.Visible = true;
+                        dgvListe.Columns.Clear();//Grid temizleme işlemi, yoksa doğru çalışmıyor.
+                        dgvListe.DataSource = yariMamulIsemirleri;
+                        label2.Text = dgvListe.RowCount.ToString();
+                        btnDepoTransfer.Visible = true;
+                        btnDurumKontrol.Enabled = false;
+                        btnYariMamulSUSK.Visible = true;
+                        btnSUSK_Kaydet.Visible = true;
                     }
                 }
 
             }
         }
-
         private void txtIsemriBarkod_Enter(object sender, EventArgs e)
         {
             if (txtIsemriBarkod.Text == "İşemri Barkod Okutunuz")
                 txtIsemriBarkod.Text = "";
         }
-
         private void txtIsemriBarkod_Leave(object sender, EventArgs e)
         {
             if (txtIsemriBarkod.Text == "")
                 txtIsemriBarkod.Text = "İşemri Barkod Okutunuz";
         }
-
         private void txtSeriNo_Leave(object sender, EventArgs e)
         {
             if (txtSeriNo.Text == "")
                 txtSeriNo.Text = "Seri No Okutunuz";
 
         }
-
         private void txtSeriNo_Enter(object sender, EventArgs e)
         {
             if (txtSeriNo.Text == "Seri No Okutunuz")
                 txtSeriNo.Text = "";
         }
-
         private void txtSeriNo_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -593,40 +653,14 @@ namespace INF_SUSK_Project
                 }
             }
         }
-
-        private void btnDirekIsemriAc_Click(object sender, EventArgs e)
-        {
-            List<TBLISEMRI> acilacakIsemriList = new List<TBLISEMRI>();
-
-            for (int i = 0; i < dgvListe.RowCount; i++)
-            {
-                TBLISEMRI isemri = new TBLISEMRI();
-                isemri.TARIH = Convert.ToDateTime(dgvListe.GetRowCellValue(i, "TARIH"));
-                isemri.ISEMRINO = (dgvListe.GetRowCellValue(i, "ISEMRINO").ToString());
-                isemri.STOK_KODU = (dgvListe.GetRowCellValue(i, "STOK_KODU").ToString());
-                isemri.MIKTAR = Convert.ToDecimal(dgvListe.GetRowCellValue(i, "MIKTAR"));
-                isemri.TESLIM_TARIHI= Convert.ToDateTime(dgvListe.GetRowCellValue(i, "TESLIM_TARIHI"));
-                isemri.ACIKLAMA = (dgvListe.GetRowCellValue(i, "ACIKLAMA").ToString());
-                isemri.SIPARIS_NO = (dgvListe.GetRowCellValue(i, "SIPARIS_NO").ToString());
-
-                if ((dgvListe.GetRowCellValue(i, "SIRA").ToString() == ""))
-                    isemri.SIRA = 0;
-                else
-                    isemri.SIRA = Convert.ToInt32(dgvListe.GetRowCellValue(i, "SIRA").ToString() == "");
-
-                acilacakIsemriList.Add(isemri);
-            }
-            inf_SUSK_Manager.DIREKACILACAK_ISEMIRLERI(acilacakIsemriList);
-        }
-
         private void ilkSeviyeIsemriAc_Click(object sender, EventArgs e)
         {
             foreach (var anaMamul in Anamamul_GenelList)
             {
-                var list = inf_SUSK_Manager.YariMamul_Bul(anaMamul.STOK_KODU, anaMamul.ISEMRINO, anaMamul.MIKTAR, anaMamul.TARIH, 2,anaMamul.ACIKLAMA);//buradaki 2 seviye anlamına geliyor, seviye 2 nin altı açılıyor.
+                var list = inf_SUSK_Manager.YariMamul_Bul(anaMamul.STOK_KODU, anaMamul.ISEMRINO, anaMamul.MIKTAR, anaMamul.TARIH, 2, anaMamul.ACIKLAMA);//buradaki 2 seviye anlamına geliyor, seviye 2 nin altı açılıyor.
                 yariMamulList.AddRange(list);
             }
-            
+
             foreach (var item in yariMamulList)
             {
                 TBLISEMRI_MKA isemri = new TBLISEMRI_MKA();
@@ -635,17 +669,17 @@ namespace INF_SUSK_Project
                 isemri.TARIH = DateTime.Now;
                 isemri.MIKTAR = item.TRANSFERMIKTAR;
                 isemri.TESLIM_TARIHI = item.TARIH.Date;//excelden gelen tarih alınacak
-                //isemri.ACIKLAMA = "B";
+                                                       //isemri.ACIKLAMA = "B";
                 isemri.ANAMAMUL = item.ANAMAMUL; //Yarımamuller gruplanıp toplandığı içinde bağlantı kısmı pasif yapıldı.
                 isemri.REFISEMRINO = item.REFISEMRINO;
 
                 inf_SUSK_Manager.ACILACAK_ISEMIRLERI(isemri);//işemri açan kod
-                //inf_SUSK_Manager.IsEmriEkalan_Guncelle(isemri.ISEMRINO, Convert.ToInt32(item.BAKIYE118KULLANILAN));
+                                                             //inf_SUSK_Manager.IsEmriEkalan_Guncelle(isemri.ISEMRINO, Convert.ToInt32(item.BAKIYE118KULLANILAN));
                 AutoClosingMessageBox.Show(isemri.ISEMRINO + " nolu işemri açılmıştır.", "İşemri Kontrol", 1000);
                 acilacakIsemirleri.Add(isemri);
             }
 
-            dgw_Ekran.DataSource = acilacakIsemirleri;
+            //dgvListe.DataSource = acilacakIsemirleri;
         }
     }
 }
